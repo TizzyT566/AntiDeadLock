@@ -56,7 +56,6 @@ while (true)
 // locks are placed in a consistent order
 ThreadPool.QueueUserWorkItem(_ =>
 {
-    Monitor.Enter(obj1);
     while (true)
     {
         AntiDeadLock antiDeadLock = new(obj2, obj1);
