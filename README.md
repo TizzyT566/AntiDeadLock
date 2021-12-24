@@ -2,6 +2,8 @@
 
 A tiny library to help prevent dead-locking multithreaded code
 
+Nuget Package: <https://www.nuget.org/packages/AntiDeadLock>
+
 ## Features
 
 Locks multiple objects in a way which prevents deadlocking.
