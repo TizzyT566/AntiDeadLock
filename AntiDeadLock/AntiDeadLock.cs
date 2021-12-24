@@ -54,13 +54,11 @@ public class AntiDeadLock
         finally
         {
             foreach (object obj in _objects)
-                if (Monitor.IsEntered(obj))
+                while (Monitor.IsEntered(obj))
                     Monitor.Exit(obj);
         }
     }
 }
-
-
 
 /// <summary>
 /// Exposes GetHashCode64() method.

@@ -7,7 +7,6 @@ if (AntiDeadLockTest)
 {
     ThreadPool.QueueUserWorkItem(_ =>
     {
-        Monitor.Enter(obj1);
         while (true)
         {
             AntiDeadLock antiDeadLock = new(obj2, obj1);
@@ -27,24 +26,12 @@ else
     ThreadPool.QueueUserWorkItem(_ =>
     {
         while (true)
-        {
             lock (obj2)
-            {
                 lock (obj1)
-                {
                     Console.WriteLine("Thread B completed.");
-                }
-            }
-        }
     });
     while (true)
-    {
         lock (obj1)
-        {
             lock (obj2)
-            {
                 Console.WriteLine("Thread A completed.");
-            }
-        }
-    }
 }
