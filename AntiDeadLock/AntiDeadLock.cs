@@ -18,6 +18,7 @@ public class AntiDeadLock
     /// Creates a new AntiDeadLock object and locks the objects specified.
     /// </summary>
     /// <param name="objects">The list of objects to lock.</param>
+    /// <remarks>Will not reuse previous locks.</remarks>
     public AntiDeadLock(params object[] objects)
     {
         try { }
@@ -35,10 +36,7 @@ public class AntiDeadLock
                 Array.Sort(objects, new ObjectHashCode64Comparer());
                 _objects = objects;
                 foreach (object obj in objects)
-                {
-                    if (!Monitor.IsEntered(obj))
-                        Monitor.Enter(obj);
-                }
+                    Monitor.Enter(obj);
             }
             else
                 throw new ArgumentException("Must provide 2 or more non-null objects for locking.");
@@ -48,14 +46,14 @@ public class AntiDeadLock
     /// <summary>
     /// Release all locked objects.
     /// </summary>
+    /// <remarks>Will release once for each object.</remarks>
     public void ReleaseLocks()
     {
         try { }
         finally
         {
             foreach (object obj in _objects)
-                while (Monitor.IsEntered(obj))
-                    Monitor.Exit(obj);
+                Monitor.Exit(obj);
         }
     }
 }

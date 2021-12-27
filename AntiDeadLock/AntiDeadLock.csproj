@@ -10,6 +10,7 @@
 		<Description>A tiny library to help prevent dead-locking multithreaded code</Description>
 		<RepositoryUrl>https://github.com/TizzyT566/AntiDeadLock</RepositoryUrl>
 		<PackageReadmeFile>README.md</PackageReadmeFile>
+		<Version>1.0.1</Version>
 	</PropertyGroup>
 
 	<ItemGroup>
